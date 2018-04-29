@@ -1,30 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace OpenMwDataManager
 {
-	public class RelayCommand : ICommand
+	public class RelayCommand<T> : ICommand
 	{
 		#region Fields
 
-		private readonly Action _execute = null;
+		private readonly Action<T> _execute = null;
+		private readonly Predicate<T> _canExecute = null;
 
 		#endregion
 
 		#region Constructors
 
 		/// <summary>
-		/// Initializes a new instance of <see cref="RelayCommand"/>.
+		/// Initializes a new instance of <see cref="RelayCommand{T}"/>.
 		/// </summary>
 		/// <param name="execute">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
 		/// <remarks><seealso cref="CanExecute"/> will always return true.</remarks>
-		public RelayCommand(Action execute)
+		public RelayCommand(Action<T> execute)
+			: this(execute, null)
 		{
-			_execute = execute;
+		}
+
+		/// <summary>
+		/// Creates a new command.
+		/// </summary>
+		/// <param name="execute">The execution logic.</param>
+		/// <param name="canExecute">The execution status logic.</param>
+		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
+		{
+			_execute = execute ?? throw new ArgumentNullException(nameof(execute));
+			_canExecute = canExecute;
 		}
 
 		#endregion
@@ -40,7 +48,7 @@ namespace OpenMwDataManager
 		///</returns>
 		public bool CanExecute(object parameter)
 		{
-			return true;
+			return _canExecute?.Invoke((T)parameter) ?? true;
 		}
 
 		///<summary>
@@ -58,7 +66,7 @@ namespace OpenMwDataManager
 		///<param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
 		public void Execute(object parameter)
 		{
-			_execute();
+			_execute((T)parameter);
 		}
 
 		#endregion

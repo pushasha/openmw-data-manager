@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenMwDataManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="OpenMW Data Manager" Height="480" Width="640">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <ListView Name="ModList" ItemsSource="{Binding DataLines}" HorizontalAlignment="Left" Height="323" Margin="10,10,0,0" VerticalAlignment="Top" Width="597">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="BtnSyncMods" Content="Sync Mods Folder" Command="{Binding SyncModsDirectoryCommand}" HorizontalAlignment="Left" Margin="465,338,0,0" VerticalAlignment="Top" Width="142" Height="28"/>
+        <Button x:Name="BtnMoveUp" Content="🠉" Command="{Binding MoveUpCommand}" CommandParameter="{Binding SelectedItem, ElementName=ModList}" HorizontalAlignment="Left" Margin="10,342,0,0" VerticalAlignment="Top" Width="33"/>
+        <Button x:Name="BtnMoveDown" Content="🠋" Command="{Binding MoveDownCommand}" CommandParameter="{Binding SelectedItem, ElementName=ModList}" HorizontalAlignment="Left" Margin="48,342,0,0" VerticalAlignment="Top" Width="33"/>
+
     </Grid>
 </Window>
