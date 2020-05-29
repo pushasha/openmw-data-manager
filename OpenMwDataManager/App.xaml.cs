@@ -17,24 +17,6 @@ namespace OpenMwDataManager
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-
-			// Load user settings and make sure they're all there
-			string morrowindInstallPath = Settings.Default.MorrowindInstallPath;
-			string openMwUserFilesPath = Settings.Default.OpenMwUserFilesPath;
-
-			if (String.IsNullOrWhiteSpace(morrowindInstallPath))
-			{
-				// TODO: Prompt user
-				Settings.Default.MorrowindInstallPath = @"C:\Program Files (x86)\Steam\steamapps\common\Morrowind";
-			}
-
-			if (String.IsNullOrWhiteSpace(openMwUserFilesPath))
-			{
-				// TODO: Prompt user
-				Settings.Default.OpenMwUserFilesPath = @"C:\Users\Sarah\Documents\My Games\OpenMW";
-			}
-
-			Settings.Default.Save(); // save changes to settings
 		}
 	}
 }

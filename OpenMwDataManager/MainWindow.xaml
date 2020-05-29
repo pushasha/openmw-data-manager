@@ -10,16 +10,23 @@
         <local:MainViewModel/>
     </Window.DataContext>
     <Grid>
-        <ListView Name="ModList" ItemsSource="{Binding DataLines}" HorizontalAlignment="Left" Height="323" Margin="10,10,0,0" VerticalAlignment="Top" Width="597">
+        <ListView Name="ModList" ItemsSource="{Binding DataLines}" HorizontalAlignment="Left" Height="240" Margin="10,10,0,0" VerticalAlignment="Top" Width="597">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="BtnSyncMods" Content="Sync Mods Folder" Command="{Binding SyncModsDirectoryCommand}" HorizontalAlignment="Left" Margin="465,338,0,0" VerticalAlignment="Top" Width="142" Height="28"/>
-        <Button x:Name="BtnMoveUp" Content="🠉" Command="{Binding MoveUpCommand}" CommandParameter="{Binding SelectedItem, ElementName=ModList}" HorizontalAlignment="Left" Margin="10,342,0,0" VerticalAlignment="Top" Width="33"/>
-        <Button x:Name="BtnMoveDown" Content="🠋" Command="{Binding MoveDownCommand}" CommandParameter="{Binding SelectedItem, ElementName=ModList}" HorizontalAlignment="Left" Margin="48,342,0,0" VerticalAlignment="Top" Width="33"/>
+        <Button x:Name="BtnSyncMods" Content="Sync Mods Folder" Command="{Binding SyncModsDirectoryCommand}" HorizontalAlignment="Left" Margin="465,255,0,0" VerticalAlignment="Top" Width="142" Height="28"/>
+        <Button x:Name="BtnMoveUp" Content="🠉" Command="{Binding MoveUpCommand}" CommandParameter="{Binding SelectedItem, ElementName=ModList}" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top" Width="33"/>
+        <Button x:Name="BtnMoveDown" Content="🠋" Command="{Binding MoveDownCommand}" CommandParameter="{Binding SelectedItem, ElementName=ModList}" HorizontalAlignment="Left" Margin="49,259,0,0" VerticalAlignment="Top" Width="33"/>
+        <Label Content="OpenMW User Files Path:" HorizontalAlignment="Left" Margin="11,295,0,0" VerticalAlignment="Top"/>
+        <Label Content="Morrowind Install Path:" HorizontalAlignment="Left" Margin="23,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.711,-1.19"/>
+        <TextBox x:Name="TxtBoxOpenMwUserFilesPath" Text="{Binding OpenMwUserFilesPath}" HorizontalAlignment="Left" Height="23" Margin="160,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="448"/>
+        <TextBox x:Name="TxtBoxMorrowindInstallPath" Text="{Binding MwInstallPath}" HorizontalAlignment="Left" Height="23" Margin="160,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="448"/>
+        <Button x:Name="BtnSavePaths" Content="Save Paths" Command="{Binding SavePathsCommand}" HorizontalAlignment="Left" Margin="501,395,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="0.547,-0.55" Height="28"/>
+        <Label Content="Mods Folder Path:" HorizontalAlignment="Left" Margin="48,364,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.711,-1.19"/>
+        <TextBox x:Name="TxtBoxModsFolderPath" Text="{Binding ModsDirectoryPath}" HorizontalAlignment="Left" Height="23" Margin="159,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="448"/>
 
     </Grid>
 </Window>
